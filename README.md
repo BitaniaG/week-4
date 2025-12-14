@@ -108,3 +108,35 @@ Feature-engineered with statistically meaningful transformations
 Ready for train-test splitting and predictive modeling in Task 4
 
 All preprocessing logic is modularized to support reproducibility and future pipeline integration.
+
+Task 4: Predictive Modeling & Fraud Analysis)
+
+Objective:
+Train and evaluate predictive models to identify fraudulent transactions using processed features from Task 3.
+
+Models Used:
+
+Logistic Regression
+
+Gradient Boosting Classifier
+
+Performance Metrics:
+
+Model	AUC
+Logistic Regression	0.9978
+Gradient Boosting	0.9865
+
+Key Insights:
+
+Logistic Regression achieved the highest AUC, but Gradient Boosting had better recall for the minority class (fraud).
+
+Important features driving fraud risk: Value, Amount, PricingStrategy.
+
+Reducing false negatives improves recall (catching more fraud) but may increase false positives, impacting precision.
+
+Trade-off between recall and precision must be considered based on business priorities.
+
+Saved Models:
+models/logistic_regression.pkl
+models/gradient_boosting.pkl
+models\gradient_boosting_shap_explainer.pkl
