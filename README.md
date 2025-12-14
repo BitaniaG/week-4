@@ -140,3 +140,51 @@ Saved Models:
 models/logistic_regression.pkl
 models/gradient_boosting.pkl
 models\gradient_boosting_shap_explainer.pkl
+
+Task 5 – Model Inference & Prediction Pipeline
+Overview
+
+Task 5 focuses on building a reproducible prediction pipeline that enables trained fraud detection models to generate inference results on new, unseen transaction data. This task bridges model development and real-world usage by operationalizing preprocessing and prediction steps.
+
+What Was Implemented
+
+A standalone prediction script (src/predict.py)
+
+Consistent preprocessing using the shared preprocess_data function
+
+Loading of trained models:
+
+Logistic Regression
+
+Gradient Boosting
+
+Fraud probability predictions using predict_proba
+
+Safe feature selection to ensure consistency with training
+
+Export of prediction results to a CSV file
+
+Input
+
+Raw transaction data:
+data/raw/data.csv
+
+Output
+
+Fraud probability predictions saved to:
+data/predictions/fraud_predictions.csv
+
+Output Columns
+
+lr_prob — Probability of fraud predicted by Logistic Regression
+
+gb_prob — Probability of fraud predicted by Gradient Boosting
+
+How to Run
+python src/predict.py
+
+Key Design Considerations:
+Feature names and order strictly match training data
+Models are loaded from serialized .pkl files
+Predictions are saved using project-root–relative paths for reliability
+No mutation of the feature matrix during inference
