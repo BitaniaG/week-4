@@ -188,3 +188,46 @@ Feature names and order strictly match training data
 Models are loaded from serialized .pkl files
 Predictions are saved using project-root–relative paths for reliability
 No mutation of the feature matrix during inference
+
+## Task 6 – Model Serving (Fraud Detection API)
+
+### Overview
+Task 6 implements a RESTful API to serve trained fraud detection models for real-time inference. The API exposes endpoints for health checks and fraud probability prediction using Logistic Regression and Gradient Boosting models.
+
+### Technology
+- FastAPI
+- Uvicorn
+- Scikit-learn
+- Pydantic
+
+### Endpoints
+- `GET /` – Health check
+- `POST /predict` – Fraud probability prediction
+
+### Input Schema
+```json
+{
+  "CountryCode": int,
+  "Amount": float,
+  "Value": float,
+  "PricingStrategy": int
+}
+Making Predictions
+Single Transaction
+import requests
+
+data = {"CountryCode": 251, "Amount": 1500, "Value": 3, "PricingStrategy": 1}
+response = requests.post("http://127.0.0.1:8000/predict", json=data)
+print(response.json())
+
+Batch Transactions
+batch_data = [
+    {"CountryCode": 251, "Amount": 1500, "Value": 3, "PricingStrategy": 1},
+    {"CountryCode": 44, "Amount": 200, "Value": 1, "PricingStrategy": 2}
+]
+response = requests.post("http://127.0.0.1:8000/predict", json=batch_data)
+print(response.json())
+
+Error Handling
+Invalid inputs or server errors are returned with an appropriate error message.
+Batch predictions log any failed transactions and continue processing others.
